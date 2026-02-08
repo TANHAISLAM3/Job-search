@@ -4,11 +4,34 @@
     <title>Job Search</title>
   </head>
   <body>
-    <h2>Search for jobs</h2>
+    <h1>Job Search App</h1>
 
     <form action="/jobs" method="get">
-      <input type="text" name="query" placeholder="Enter job keyword" />
+      <input
+        type="text"
+        name="query"
+        placeholder="e.g. python developer london"
+        required
+      />
       <button type="submit">Search</button>
     </form>
+
+    <hr />
+
+    <div id="results">
+      {% if jobs %} {% for job in jobs %}
+      <div style="margin-bottom: 20px">
+        <h3>{{ job.title }}</h3>
+        <p><strong>Company:</strong> {{ job.company }}</p>
+        <p><strong>Location:</strong> {{ job.location }}</p>
+        <p><strong>Posted:</strong> {{ job.posted }}</p>
+        <p><strong>Publisher:</strong> {{ job.publisher }}</p>
+        <p><a href="{{ job.link }}" target="_blank">Apply Here</a></p>
+        <hr />
+      </div>
+      {% endfor %} {% else %}
+      <p>No jobs found. Try a different search.</p>
+      {% endif %}
+    </div>
   </body>
 </html>
