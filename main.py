@@ -1,9 +1,15 @@
-
 from flask import Flask, jsonify, request, render_template
 import http.client
 import json
 import datetime
 from urllib.parse import quote
+import os
+from dotenv import load_dotenv  # To load API key from .env
+
+
+
+load_dotenv()  # Reads .env file
+API_KEY = os.getenv("RAPIDAPI_KEY")  # Get your key
 
 app = Flask(__name__)
 
@@ -16,7 +22,7 @@ def get_jobs():
     
     conn = http.client.HTTPSConnection("jsearch.p.rapidapi.com")
     headers = {
-        'x-rapidapi-key': "9816876905msh4e3d99d3bf83b12p12f157jsnf3725b388ebd",
+        'x-rapidapi-key': API_KEY,
         'x-rapidapi-host': "jsearch.p.rapidapi.com"
     }
     search_term = request.args.get("query")
